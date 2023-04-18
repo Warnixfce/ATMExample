@@ -1,0 +1,35 @@
+﻿@model List<ATMExercise.Models.ViewModels.OperacionViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+
+                <th scope="col"> @Html.DisplayNameFor(model => model.FirstOrDefault().TipoOperacion)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().NumeroTarjeta)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().FechaHora)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().Monto)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
+                    <td>  @Html.DisplayFor(modelItem => item.NumeroTarjeta)</td>
+                    <td>  @Html.DisplayFor(modelItem => item.FechaHora)</td>
+                    <td>  @Html.DisplayFor(modelItem => item.Monto)</td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+</div>
