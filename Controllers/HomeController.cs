@@ -32,7 +32,7 @@ namespace ATMExercise.Controllers
                 operacion.NumeroTarjeta = tarjetas.FirstOrDefault(x => x.IdTarjeta == item.IdTarjeta).NumeroTarjeta.ToString();
                 operacion.TipoOperacion = tipoOp.FirstOrDefault(y => y.IdTipoOperacion == item.IdTipoOperacion).Nombre;
                 operacion.FechaHora = item.FechaHora.ToString();
-                operacion.Monto = item.Monto.ToString();
+                operacion.Monto = item.Monto.ToString();                
                 lista.Add(operacion);
             }
 
@@ -46,13 +46,29 @@ namespace ATMExercise.Controllers
                 lista.Add(operacion);
             }
 
-            return View(lista);
+            return View(new TarjetaViewModel());
         }
 
-        public IActionResult Privacy()
+        public IActionResult PIN(TarjetaViewModel tarjetaView)
+        {
+            var numeroTarjeta = tarjetaView.NumeroTarjeta;
+            return View();
+        }
+
+        public IActionResult Operaciones()
         {
             return View();
         }
+
+        public IActionResult Errores()
+        {
+            return View();
+        }
+
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

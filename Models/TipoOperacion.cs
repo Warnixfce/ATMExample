@@ -13,5 +13,5 @@ public partial class TipoOperacion
 
     public virtual ICollection<OperacionAdministrativa> OperacionAdministrativas { get; set; } = new List<OperacionAdministrativa>();
 
-    public virtual ICollection<OperacionMonetarium> OperacionMonetaria { get; set; } = new List<OperacionMonetarium>();
+    public virtual ICollection<OperacionMonetaria> OperacionMonetaria { get; set; } = new List<OperacionMonetaria>();
 }

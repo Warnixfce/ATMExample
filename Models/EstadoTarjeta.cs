@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ATMExercise.Models;
 
-public partial class EstadoTarjetum
+public partial class EstadoTarjeta
 {
     public int IdEstado { get; set; }
 
@@ -11,5 +11,5 @@ public partial class EstadoTarjetum
 
     public string? Descripcion { get; set; }
 
-    public virtual ICollection<Tarjetum> Tarjeta { get; set; } = new List<Tarjetum>();
+    public virtual ICollection<Tarjeta> Tarjeta { get; set; } = new List<Tarjeta>();
 }

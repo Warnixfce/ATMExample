@@ -13,7 +13,7 @@ public partial class OperacionAdministrativa
 
     public DateTime FechaHora { get; set; }
 
-    public virtual Tarjetum IdTarjetaNavigation { get; set; } = null!;
+    public virtual Tarjeta IdTarjetaNavigation { get; set; } = null!;
 
     public virtual TipoOperacion IdTipoOperacionNavigation { get; set; } = null!;
 }

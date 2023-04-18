@@ -15,6 +15,10 @@ public partial class Tarjeta
 
     public double Balance { get; set; }
 
+    public int IdEstado { get; set; }
+
+    public virtual EstadoTarjeta IdEstadoNavigation { get; set; } = null!;
+
     public virtual ICollection<OperacionAdministrativa> OperacionAdministrativas { get; set; } = new List<OperacionAdministrativa>();
 
     public virtual ICollection<OperacionMonetaria> OperacionMonetaria { get; set; } = new List<OperacionMonetaria>();

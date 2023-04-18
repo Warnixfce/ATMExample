@@ -15,19 +15,19 @@ public partial class AtmContext : DbContext
     {
     }
 
-    public virtual DbSet<EstadoTarjetum> EstadoTarjeta { get; set; }
+    public virtual DbSet<EstadoTarjeta> EstadoTarjeta { get; set; }
 
     public virtual DbSet<OperacionAdministrativa> OperacionAdministrativas { get; set; }
 
-    public virtual DbSet<OperacionMonetarium> OperacionMonetaria { get; set; }
+    public virtual DbSet<OperacionMonetaria> OperacionMonetaria { get; set; }
 
-    public virtual DbSet<Tarjetum> Tarjeta { get; set; }
+    public virtual DbSet<Tarjeta> Tarjeta { get; set; }
 
     public virtual DbSet<TipoOperacion> TipoOperacions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<EstadoTarjetum>(entity =>
+        modelBuilder.Entity<EstadoTarjeta>(entity =>
         {
             entity.HasKey(e => e.IdEstado);
 
@@ -64,7 +64,7 @@ public partial class AtmContext : DbContext
                 .HasConstraintName("FK_Operacion_Administrativa_Tipo_Operacion");
         });
 
-        modelBuilder.Entity<OperacionMonetarium>(entity =>
+        modelBuilder.Entity<OperacionMonetaria>(entity =>
         {
             entity.HasKey(e => e.IdOperacionMonetaria);
 
@@ -88,7 +88,7 @@ public partial class AtmContext : DbContext
                 .HasConstraintName("FK_Operacion_Monetaria_Tipo_Operacion");
         });
 
-        modelBuilder.Entity<Tarjetum>(entity =>
+        modelBuilder.Entity<Tarjeta>(entity =>
         {
             entity.HasKey(e => e.IdTarjeta);
 

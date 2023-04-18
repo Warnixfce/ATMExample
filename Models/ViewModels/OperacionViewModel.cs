@@ -10,5 +10,7 @@
 
         public string Monto { get; set; }
 
+        public string Balance { get; set; }
+
     }
 }
