@@ -51,14 +51,45 @@ namespace ATMExercise.Controllers
 
         public IActionResult PIN(TarjetaViewModel tarjetaView)
         {
-            var numeroTarjeta = tarjetaView.NumeroTarjeta;
-            return View();
+            //Validar numero tarjeta
+            if (_context.Tarjeta.Any(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta))
+            {
+                Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta);
+                if (tarjetaMatch.IdEstado == 1)
+                {
+                    return View(tarjetaView);
+                }
+                else
+                {
+                    EstadoTarjeta estadoTarjeta = _context.EstadoTarjeta.FirstOrDefault(m=>m.IdEstado == tarjetaMatch.IdEstado);
+                    return View("Errores", new ErrorViewModel { RequestId = $"Error - La tarjeta se encuentra {estadoTarjeta.Nombre}. Por favor solicite asistencia de un representante del banco."});
+                }               
+            }
+            else
+            {
+                return View("Errores",new ErrorViewModel { RequestId= "Error - La tarjeta no existe. Por favor solicite asistencia de un representante del banco." });
+            }
         }
 
         public IActionResult Operaciones(TarjetaViewModel tarjetaView)
         {
-            var pinTarjeta = tarjetaView.PIN;
-            return View();
+            if (_context.Tarjeta.Any(m => m.Pin.ToString() == tarjetaView.PIN))
+            {
+                Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta && m.Pin.ToString() == tarjetaView.PIN);
+                tarjetaView.Id_Tarjeta = tarjetaMatch.IdTarjeta.ToString();
+                tarjetaView.FechaVencimiento = tarjetaMatch.FechaVencimiento.ToString();
+                tarjetaView.Balance = tarjetaMatch.Balance.ToString();
+                tarjetaView.Id_Estado = tarjetaMatch.IdEstado.ToString();
+                return View(tarjetaView);
+            }
+            else if(tarjetaView.NumeroTarjeta == null)
+            {
+                return View();
+            }
+            else
+            {
+                return View("Errores", new ErrorViewModel { RequestId = "anda paya bobo" });
+            }
         }
 
         public IActionResult Errores()

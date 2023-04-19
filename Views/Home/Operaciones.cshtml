@@ -1,12 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ATMExercise.Models.ViewModels.TarjetaViewModel
 @{
     ViewData["Title"] = "Operaciones";
 }
-<p>Pagina de operaciones</p>
 
-<div class="text-center">
-    <h1 class="display-4">OriginBank ATM</h1>
-    <h2 class="display-5">Bienvenido!</h2>
+<div class="text-center">    
+    <h1 class="display-5">¿Qué desea realizar?</h1>
+    <form asp-action="Balance" asp-controller="OpDisponibles">        
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                @Html.HiddenFor(model=>model.Id_Tarjeta)
+                @Html.HiddenFor(model=>model.NumeroTarjeta)
+                @Html.HiddenFor(model=>model.PIN)
+                @Html.HiddenFor(model=>model.FechaVencimiento)
+                @Html.HiddenFor(model=>model.Balance)
+                @Html.HiddenFor(model=>model.Id_Estado)
+            </div>            
+            <div class="btn-group">
+                <input type="submit" class="btn btn-primary py-3" value="Balance" />
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="OpDisponibles" asp-action="Retiro">Retiro</a>
+            
+            </div>
+            <div class ="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
+            </div>
+        </div>
+    </form>
 </div>

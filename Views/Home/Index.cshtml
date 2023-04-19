@@ -9,33 +9,33 @@
     <h1 class="display-4">OriginBank ATM</h1>
     <h2 class="display-5">Bienvenido!</h2>
     <p>Ingrese los 16 dígitos de su tarjeta:</p>
-    <form asp-action="PIN" asp-controller="Home">
-    <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
-        <div class="btn-group">
-            @Html.TextBoxFor(model=> model.NumeroTarjeta, new { @class = "text-center form-control-lg mb-2" })
-           @* <input class="text-center form-control-lg mb-2" id="code" >*@
+    <form asp-action="PIN" asp-controller="Home"> @*a donde sea que apunte, me permite pasarle el model*@
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                @Html.TextBoxFor(model=> model.NumeroTarjeta, new { @class = "text-center form-control-lg mb-2" })
+               @* <input class="text-center form-control-lg mb-2" id="code" >*@
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '1';">1</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '2';">2</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '3';">3</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '4';">4</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '5';">5</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '6';">6</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '7';">7</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '8';">8</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '9';">9</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value = ''">Limpiar</button>
+                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '0';">0</button>
+                <input type="submit" class="btn btn-primary py-3" value="Aceptar"/>
+            </div>
         </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '1';">1</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '2';">2</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '3';">3</button>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '4';">4</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '5';">5</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '6';">6</button>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '7';">7</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '8';">8</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '9';">9</button>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value = ''">Limpiar</button>
-            <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '0';">0</button>
-            <input type="submit" class="btn btn-primary py-3" value="Aceptar"/>
-        </div>        
-    </div>
     </form>
 
     @*<table class="table table-dark table-striped">
