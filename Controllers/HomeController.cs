@@ -2,6 +2,7 @@
 using ATMExercise.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ATMExercise.Controllers
 {
@@ -49,8 +50,32 @@ namespace ATMExercise.Controllers
             return View(new TarjetaViewModel());
         }
 
+        public IActionResult AddNumberT(string num, string tar = "")
+        {
+            var test = new TarjetaViewModel();
+            test.NumeroTarjeta = tar;
+
+            if (tar.Length <= 18)
+            {
+                if ((tar.Length + 1) % 5 == 0)
+                {
+                    test.NumeroTarjeta += "-";
+                }
+                test.NumeroTarjeta += num;
+                return View("Index", test);
+            }
+            else
+            {
+                return View("Index", test);
+            }
+        }
+
         public IActionResult PIN(TarjetaViewModel tarjetaView)
         {
+            if(tarjetaView.NumeroTarjeta.Contains("-"))
+            {
+                tarjetaView.NumeroTarjeta = tarjetaView.NumeroTarjeta.Replace("-", "");
+            }
             //Validar numero tarjeta
             if (_context.Tarjeta.Any(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta))
             {
@@ -61,13 +86,31 @@ namespace ATMExercise.Controllers
                 }
                 else
                 {
-                    EstadoTarjeta estadoTarjeta = _context.EstadoTarjeta.FirstOrDefault(m=>m.IdEstado == tarjetaMatch.IdEstado);
-                    return View("Errores", new ErrorViewModel { RequestId = $"Error - La tarjeta se encuentra {estadoTarjeta.Nombre}. Por favor solicite asistencia de un representante del banco."});
-                }               
+                    EstadoTarjeta estadoTarjeta = _context.EstadoTarjeta.FirstOrDefault(m => m.IdEstado == tarjetaMatch.IdEstado);
+                    return View("Errores", new ErrorViewModel { RequestId = $"Error - La tarjeta se encuentra {estadoTarjeta.Nombre}. Por favor solicite asistencia de un representante del banco." });
+                }
             }
             else
             {
-                return View("Errores",new ErrorViewModel { RequestId= "Error - La tarjeta no existe. Por favor solicite asistencia de un representante del banco." });
+                return View("Errores", new ErrorViewModel { RequestId = "Error - La tarjeta no existe. Por favor solicite asistencia de un representante del banco." });
+            }
+        }
+
+        public IActionResult AddPinT(string num, string pin = "", string numeroTarj = "")
+        {
+            var tarjetaPin = new TarjetaViewModel();
+            tarjetaPin.PIN = pin;
+            tarjetaPin.NumeroTarjeta= numeroTarj;
+
+            if (pin.Length < 4) //1289
+            {
+                tarjetaPin.PIN += num;
+                ModelState.Clear();
+                return View("PIN", tarjetaPin);
+            }
+            else
+            {
+                return View("PIN", tarjetaPin);
             }
         }
 
@@ -82,7 +125,7 @@ namespace ATMExercise.Controllers
                 tarjetaView.Id_Estado = tarjetaMatch.IdEstado.ToString();
                 return View(tarjetaView);
             }
-            else if(tarjetaView.NumeroTarjeta == null)
+            else if (tarjetaView.NumeroTarjeta == null)
             {
                 return View();
             }
@@ -92,7 +135,7 @@ namespace ATMExercise.Controllers
             }
         }
 
-        public IActionResult Errores()
+        public IActionResult Errores(TarjetaViewModel tarjetaView)
         {
             return View();
         }

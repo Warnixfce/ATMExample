@@ -1,4 +1,6 @@
-﻿namespace ATMExercise.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ATMExercise.Models.ViewModels
 {
     public class TarjetaViewModel
     {

@@ -24,8 +24,8 @@ public partial class AtmContext : DbContext
     public virtual DbSet<Tarjeta> Tarjeta { get; set; }
 
     public virtual DbSet<TipoOperacion> TipoOperacions { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EstadoTarjeta>(entity =>
         {

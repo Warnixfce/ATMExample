@@ -12,27 +12,30 @@
     <form asp-action="PIN" asp-controller="Home"> @*a donde sea que apunte, me permite pasarle el model*@
         <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
             <div class="btn-group">
-                @Html.TextBoxFor(model=> model.NumeroTarjeta, new { @class = "text-center form-control-lg mb-2" })
+                @*<input class="text-center form-control-lg mb-2" id="numeroTarj" name="numeroTarj" required minlength="1" maxlength="16" size="10" />*@
+                @Html.TextBoxFor(model=> model.NumeroTarjeta, new { @class = "text-center form-control-lg mb-2"/*, disabled="disabled", @readonly = "readonly"*/})
+                @*<input class="text-center form-control-lg mb-2" required minlength="1" maxlength="16" size="10">*@
                @* <input class="text-center form-control-lg mb-2" id="code" >*@
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '1';">1</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '2';">2</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '3';">3</button>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="1" asp-route-tar="@Model.NumeroTarjeta">1</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="2" asp-route-tar="@Model.NumeroTarjeta">2</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="3" asp-route-tar="@Model.NumeroTarjeta">3</a>
+                
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '4';">4</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '5';">5</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '6';">6</button>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="4" asp-route-tar="@Model.NumeroTarjeta">4</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="5" asp-route-tar="@Model.NumeroTarjeta">5</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="6" asp-route-tar="@Model.NumeroTarjeta">6</a>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '7';">7</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '8';">8</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '9';">9</button>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="7" asp-route-tar="@Model.NumeroTarjeta">7</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="8" asp-route-tar="@Model.NumeroTarjeta">8</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="9" asp-route-tar="@Model.NumeroTarjeta">9</a>                
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value = ''">Limpiar</button>
-                <button type="button" class="btn btn-outline-secondary py-3" onclick="document.getElementById('NumeroTarjeta').value=document.getElementById('NumeroTarjeta').value + '0';">0</button>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="" asp-route-tar="">Limpiar</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="0" asp-route-tar="@Model.NumeroTarjeta">0</a>                
                 <input type="submit" class="btn btn-primary py-3" value="Aceptar"/>
             </div>
         </div>
