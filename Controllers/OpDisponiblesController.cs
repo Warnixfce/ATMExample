@@ -36,6 +36,7 @@ namespace ATMExercise.Controllers
 
             return View(tarjetaMatcheada);
         }
+
         public IActionResult Retiro()
         {
             return View();

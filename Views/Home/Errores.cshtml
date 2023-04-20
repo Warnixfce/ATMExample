@@ -1,7 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ATMExercise.Models.ViewModels.ErrorViewModel
 @{
     ViewData["Title"] = "Error";
 }
-<p>Pagina de errores</p>
+
+<div class="text-center">
+    @if (Model.ShowRequestId)
+    {
+        <h1>
+            <strong>ERROR</strong>
+        </h1>
+        <p>
+            <code>@Model.RequestId</code>
+        </p>
+    }
+    <form asp-action="Index" asp-controller="Home">
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">                
+                @*<a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>*@
+                <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
+            </div>
+        </div>
+    </form>
+
+
+
+
+</div>

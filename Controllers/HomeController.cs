@@ -3,6 +3,7 @@ using ATMExercise.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.EntityFrameworkCore;
 
 namespace ATMExercise.Controllers
 {
@@ -52,21 +53,21 @@ namespace ATMExercise.Controllers
 
         public IActionResult AddNumberT(string num, string tar = "")
         {
-            var test = new TarjetaViewModel();
-            test.NumeroTarjeta = tar;
+            var tarjetaNum = new TarjetaViewModel();
+            tarjetaNum.NumeroTarjeta = tar;
 
             if (tar.Length <= 18)
             {
                 if ((tar.Length + 1) % 5 == 0)
                 {
-                    test.NumeroTarjeta += "-";
+                    tarjetaNum.NumeroTarjeta += "-";
                 }
-                test.NumeroTarjeta += num;
-                return View("Index", test);
+                tarjetaNum.NumeroTarjeta += num;
+                return View("Index", tarjetaNum);
             }
             else
             {
-                return View("Index", test);
+                return View("Index", tarjetaNum);
             }
         }
 
@@ -82,25 +83,39 @@ namespace ATMExercise.Controllers
                 Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta);
                 if (tarjetaMatch.IdEstado == 1)
                 {
+                    if (tarjetaMatch.Intentos > 0)
+                    {
+                        ViewBag.Mensaje = "Recuerde que ya tiene intentos incorrectos";
+                        tarjetaView.Intentos = tarjetaMatch.Intentos.ToString();
+                    }
+                    if(tarjetaMatch.Intentos == 0)
+                    {
+                        tarjetaView.Intentos = tarjetaMatch.Intentos.ToString();
+                    }
                     return View(tarjetaView);
                 }
                 else
                 {
+                    //TODO sacar esto
+                    //tarjetaMatch.Intentos = 0;
+                    //tarjetaMatch.IdEstado = 1;
+                    //_context.SaveChanges();
                     EstadoTarjeta estadoTarjeta = _context.EstadoTarjeta.FirstOrDefault(m => m.IdEstado == tarjetaMatch.IdEstado);
-                    return View("Errores", new ErrorViewModel { RequestId = $"Error - La tarjeta se encuentra {estadoTarjeta.Nombre}. Por favor solicite asistencia de un representante del banco." });
+                    return View("Errores", new ErrorViewModel { RequestId = $"La tarjeta se encuentra {estadoTarjeta.Nombre}. Por favor solicite asistencia de un representante del banco." });
                 }
             }
             else
             {
-                return View("Errores", new ErrorViewModel { RequestId = "Error - La tarjeta no existe. Por favor solicite asistencia de un representante del banco." });
+                return View("Errores", new ErrorViewModel { RequestId = "La tarjeta no existe. Por favor solicite asistencia de un representante del banco." });
             }
         }
 
-        public IActionResult AddPinT(string num, string pin = "", string numeroTarj = "")
+        public IActionResult AddPinT(string num, string pin = "", string numeroTarj = "", string intentos = "")
         {
             var tarjetaPin = new TarjetaViewModel();
             tarjetaPin.PIN = pin;
             tarjetaPin.NumeroTarjeta= numeroTarj;
+            tarjetaPin.Intentos = intentos;
 
             if (pin.Length < 4) //1289
             {
@@ -116,7 +131,7 @@ namespace ATMExercise.Controllers
 
         public IActionResult Operaciones(TarjetaViewModel tarjetaView)
         {
-            if (_context.Tarjeta.Any(m => m.Pin.ToString() == tarjetaView.PIN))
+            if (_context.Tarjeta.Any(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta && m.Pin.ToString() == tarjetaView.PIN))
             {
                 Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta && m.Pin.ToString() == tarjetaView.PIN);
                 tarjetaView.Id_Tarjeta = tarjetaMatch.IdTarjeta.ToString();
@@ -131,7 +146,24 @@ namespace ATMExercise.Controllers
             }
             else
             {
-                return View("Errores", new ErrorViewModel { RequestId = "anda paya bobo" });
+                Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta);
+                tarjetaMatch.Intentos++;
+                _context.SaveChanges();
+                tarjetaView.Intentos = tarjetaMatch.Intentos.ToString();
+                if (tarjetaMatch.Intentos >= 4)
+                {
+                    if(tarjetaMatch.IdEstado != 2)
+                    {
+                        tarjetaMatch.IdEstado = 2;
+                    }
+                    _context.SaveChanges();
+                    return View("Errores", new ErrorViewModel { RequestId = "Ha llegado al límite de intentos máximos de ingreso de PIN. La tarjeta se ha bloqueado. Por favor solicite asistencia de un representante del banco."});
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Dato erróneo. Ingrese el PIN nuevamente.";
+                    return View("PIN", tarjetaView);
+                }
             }
         }
 

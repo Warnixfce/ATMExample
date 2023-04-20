@@ -51,10 +51,11 @@
                 @Html.HiddenFor(model=>model.FechaVencimiento)
                 @Html.HiddenFor(model=>model.Balance)
                 @Html.HiddenFor(model=>model.Id_Estado)
+                @Html.HiddenFor(model=>model.Intentos)
             </div>
             <div class="btn-group">
                 <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
-                <input type="submit" class="btn btn-primary py-3" value="Atrás" />
+                <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
             </div>
         </div>
     </form>

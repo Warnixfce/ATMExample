@@ -17,6 +17,8 @@ public partial class Tarjeta
 
     public int IdEstado { get; set; }
 
+    public short Intentos { get; set; }
+
     public virtual EstadoTarjeta IdEstadoNavigation { get; set; } = null!;
 
     public virtual ICollection<OperacionAdministrativa> OperacionAdministrativas { get; set; } = new List<OperacionAdministrativa>();
