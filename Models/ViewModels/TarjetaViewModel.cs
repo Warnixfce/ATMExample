@@ -17,5 +17,9 @@ namespace ATMExercise.Models.ViewModels
         public string Id_Estado { get; set; }
         
         public string Intentos { get; set; }
+
+        public string MontoRetiro { get; set; }
+
+        public string FechaHoraRegistro { get; set; }
     }
 }

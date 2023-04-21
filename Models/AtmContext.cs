@@ -17,14 +17,14 @@ public partial class AtmContext : DbContext
 
     public virtual DbSet<EstadoTarjeta> EstadoTarjeta { get; set; }
 
-    public virtual DbSet<OperacionAdministrativa> OperacionAdministrativas { get; set; }
+    public virtual DbSet<OperacionAdministrativa> OperacionAdministrativa { get; set; }
 
     public virtual DbSet<OperacionMonetaria> OperacionMonetaria { get; set; }
 
     public virtual DbSet<Tarjeta> Tarjeta { get; set; }
 
-    public virtual DbSet<TipoOperacion> TipoOperacions { get; set; }
-
+    public virtual DbSet<TipoOperacion> TipoOperacion { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EstadoTarjeta>(entity =>
@@ -36,8 +36,12 @@ public partial class AtmContext : DbContext
             entity.Property(e => e.IdEstado)
                 .ValueGeneratedNever()
                 .HasColumnName("ID_Estado");
-            entity.Property(e => e.Descripcion).HasColumnType("text");
-            entity.Property(e => e.Nombre).HasColumnType("text");
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<OperacionAdministrativa>(entity =>
@@ -46,9 +50,7 @@ public partial class AtmContext : DbContext
 
             entity.ToTable("Operacion_Administrativa");
 
-            entity.Property(e => e.IdOperacionAdministrativa)
-                .ValueGeneratedNever()
-                .HasColumnName("ID_Operacion_Administrativa");
+            entity.Property(e => e.IdOperacionAdministrativa).HasColumnName("ID_Operacion_Administrativa");
             entity.Property(e => e.FechaHora).HasColumnType("datetime");
             entity.Property(e => e.IdTarjeta).HasColumnName("ID_Tarjeta");
             entity.Property(e => e.IdTipoOperacion).HasColumnName("ID_Tipo_Operacion");
@@ -70,12 +72,11 @@ public partial class AtmContext : DbContext
 
             entity.ToTable("Operacion_Monetaria");
 
-            entity.Property(e => e.IdOperacionMonetaria)
-                .ValueGeneratedNever()
-                .HasColumnName("ID_Operacion_Monetaria");
+            entity.Property(e => e.IdOperacionMonetaria).HasColumnName("ID_Operacion_Monetaria");
             entity.Property(e => e.FechaHora).HasColumnType("datetime");
             entity.Property(e => e.IdTarjeta).HasColumnName("ID_Tarjeta");
             entity.Property(e => e.IdTipoOperacion).HasColumnName("ID_Tipo_Operacion");
+            entity.Property(e => e.Monto).HasColumnType("decimal(20, 2)");
 
             entity.HasOne(d => d.IdTarjetaNavigation).WithMany(p => p.OperacionMonetaria)
                 .HasForeignKey(d => d.IdTarjeta)
@@ -95,6 +96,7 @@ public partial class AtmContext : DbContext
             entity.Property(e => e.IdTarjeta)
                 .ValueGeneratedNever()
                 .HasColumnName("ID_Tarjeta");
+            entity.Property(e => e.Balance).HasColumnType("decimal(20, 2)");
             entity.Property(e => e.FechaVencimiento)
                 .HasMaxLength(5)
                 .IsUnicode(false)
@@ -118,8 +120,12 @@ public partial class AtmContext : DbContext
             entity.Property(e => e.IdTipoOperacion)
                 .ValueGeneratedNever()
                 .HasColumnName("ID_Tipo_Operacion");
-            entity.Property(e => e.Descripcion).HasColumnType("text");
-            entity.Property(e => e.Nombre).HasColumnType("text");
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

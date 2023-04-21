@@ -1,7 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ATMExercise.Models.ViewModels.OperacionViewModel
 @{
     ViewData["Title"] = "Reporte";
 }
-<p>Pagina de reporte</p>
+
+<div class="text-center">
+    <h1 class ="display-4">Operación realizada con éxito</h1>
+    <h2 class="display-5">Reporte de operación</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+
+                <th scope="col">@Html.DisplayNameFor(model => model.NumeroTarjeta)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.TipoOperacion)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FechaHora)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Monto)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Balance)</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @*@foreach (var item in Model)
+            {
+            <tr>
+            <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
+            <td>  @Html.DisplayFor(modelItem => item.NumeroTarjeta)</td>
+            <td>  @Html.DisplayFor(modelItem => item.FechaHora)</td>
+            <td>  @Html.DisplayFor(modelItem => item.Monto)</td>
+            </tr>
+            }*@
+
+            <tr>
+                <td>  @Html.DisplayFor(model => model.NumeroTarjeta)</td>
+                <td>  @Html.DisplayFor(model => model.TipoOperacion)</td>
+                <td>  @Html.DisplayFor(model => model.FechaHora)</td>
+                <td>  @Html.DisplayFor(model => model.Monto)</td>
+                <td>  @Html.DisplayFor(model => model.Balance)</td>
+            </tr>
+
+            @*<tr>
+            <td> @Html</td>
+            <td>  @Html.DisplayFor(Model => Model.FechaVencimiento)</td>
+            <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
+            <td>  @Html.DisplayFor(Model => Model.Balance)</td>
+
+            </tr>*@
+        </tbody>
+    </table>
+    <form asp-action="Operaciones" asp-controller="Home">
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                @Html.HiddenFor(model=>model.IdTarjeta)
+                @Html.HiddenFor(model=>model.NumeroTarjeta)
+                @Html.HiddenFor(model=>model.Pin)
+                @Html.HiddenFor(model=>model.Balance)    
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
+                <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
+            </div>
+        </div>
+    </form>
+</div>
+

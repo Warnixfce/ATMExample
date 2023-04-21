@@ -7,5 +7,6 @@ namespace ATMExercise.Models.ViewModels
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         public int Attempts { get; set; }
+        
     }
 }

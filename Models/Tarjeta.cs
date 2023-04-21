@@ -13,7 +13,7 @@ public partial class Tarjeta
 
     public string FechaVencimiento { get; set; } = null!;
 
-    public double Balance { get; set; }
+    public decimal Balance { get; set; }
 
     public int IdEstado { get; set; }
 
