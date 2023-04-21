@@ -1,0 +1,45 @@
+﻿@model ATMExercise.Models.ViewModels.OperacionViewModel
+@{
+    ViewData["Title"] = "Reporte";
+}
+
+<div class="text-center">
+    <h1 class ="display-4">Operación realizada con éxito</h1>
+    <h2 class="display-5">Reporte de operación</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+
+                <th scope="col">@Html.DisplayNameFor(model => model.NumeroTarjeta)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.TipoOperacion)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.FechaHora)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Monto)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Balance)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>  @Html.DisplayFor(model => model.NumeroTarjeta)</td>
+                <td>  @Html.DisplayFor(model => model.TipoOperacion)</td>
+                <td>  @Html.DisplayFor(model => model.FechaHora)</td>
+                <td>  @Html.DisplayFor(model => model.Monto)</td>
+                <td>  @Html.DisplayFor(model => model.Balance)</td>
+            </tr>
+        </tbody>
+    </table>
+    <form asp-action="Operaciones" asp-controller="Home">
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                @Html.HiddenFor(model=>model.IdTarjeta)
+                @Html.HiddenFor(model=>model.NumeroTarjeta)
+                @Html.HiddenFor(model=>model.Pin)
+                @Html.HiddenFor(model=>model.Balance)    
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
+                <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
+            </div>
+        </div>
+    </form>
+</div>
+

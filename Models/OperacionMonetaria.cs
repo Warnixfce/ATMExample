@@ -13,7 +13,7 @@ public partial class OperacionMonetaria
 
     public DateTime FechaHora { get; set; }
 
-    public double Monto { get; set; }
+    public decimal Monto { get; set; }
 
     public virtual Tarjeta IdTarjetaNavigation { get; set; } = null!;
 

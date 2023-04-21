@@ -1,35 +1,41 @@
-﻿@model List<ATMExercise.Models.ViewModels.OperacionViewModel>
+﻿@model ATMExercise.Models.ViewModels.TarjetaViewModel
 @{
     ViewData["Title"] = "Home Page";
+    ViewBag.Numero = "";
 }
 
 
-
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-
-                <th scope="col"> @Html.DisplayNameFor(model => model.FirstOrDefault().TipoOperacion)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().NumeroTarjeta)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().FechaHora)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.FirstOrDefault().Monto)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
-                    <td>  @Html.DisplayFor(modelItem => item.NumeroTarjeta)</td>
-                    <td>  @Html.DisplayFor(modelItem => item.FechaHora)</td>
-                    <td>  @Html.DisplayFor(modelItem => item.Monto)</td>
-                </tr>
-
-            }
-
-        </tbody>
-    </table>
-
+    <h1 class="display-4">OriginBank ATM</h1>
+    <h2 class="display-5">Bienvenido!</h2>
+    <p>Ingrese los 16 dígitos de su tarjeta:</p>
+    <form asp-action="PIN" asp-controller="Home">
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">                
+                @Html.TextBoxFor(model=> model.NumeroTarjeta, new { @class = "text-center form-control-lg mb-2", @readonly = "readonly"})
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="1" asp-route-tar="@Model.NumeroTarjeta">1</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="2" asp-route-tar="@Model.NumeroTarjeta">2</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="3" asp-route-tar="@Model.NumeroTarjeta">3</a>
+                
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="4" asp-route-tar="@Model.NumeroTarjeta">4</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="5" asp-route-tar="@Model.NumeroTarjeta">5</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="6" asp-route-tar="@Model.NumeroTarjeta">6</a>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="7" asp-route-tar="@Model.NumeroTarjeta">7</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="8" asp-route-tar="@Model.NumeroTarjeta">8</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="9" asp-route-tar="@Model.NumeroTarjeta">9</a>                
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="" asp-route-tar="">Limpiar</a>
+                <a class="btn btn-outline-secondary py-3" asp-controller="Home" asp-action="AddNumberT" asp-route-num="0" asp-route-tar="@Model.NumeroTarjeta">0</a>                
+                <input type="submit" class="btn btn-primary py-3" value="Aceptar"/>
+            </div>
+        </div>
+    </form>
 </div>
+

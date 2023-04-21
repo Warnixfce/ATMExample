@@ -1,0 +1,27 @@
+﻿@model ATMExercise.Models.ViewModels.TarjetaViewModel
+@{
+    ViewData["Title"] = "Operaciones";
+}
+
+<div class="text-center">    
+    <h1 class="display-5">¿Qué desea realizar?</h1>
+    <form asp-action="Balance" asp-controller="OpDisponibles">
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                @Html.HiddenFor(model=>model.Id_Tarjeta)
+                @Html.HiddenFor(model=>model.NumeroTarjeta)
+                @Html.HiddenFor(model=>model.PIN)
+                @Html.HiddenFor(model=>model.FechaVencimiento)
+                @Html.HiddenFor(model=>model.Balance)
+                @Html.HiddenFor(model=>model.Id_Estado)
+            </div>
+            <div class="btn-group">                
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="OpDisponibles" asp-action="AddMontoT" asp-route-idTar="@Model.Id_Tarjeta">Retiro</a>
+                <input type="submit" class="btn btn-outline-secondary py-3" value="Balance" />
+            </div>
+            <div class ="btn-group">
+                <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
+            </div>
+        </div>
+    </form>
+</div>

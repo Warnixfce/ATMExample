@@ -13,7 +13,13 @@ public partial class Tarjeta
 
     public string FechaVencimiento { get; set; } = null!;
 
-    public double Balance { get; set; }
+    public decimal Balance { get; set; }
+
+    public int IdEstado { get; set; }
+
+    public short Intentos { get; set; }
+
+    public virtual EstadoTarjeta IdEstadoNavigation { get; set; } = null!;
 
     public virtual ICollection<OperacionAdministrativa> OperacionAdministrativas { get; set; } = new List<OperacionAdministrativa>();
 
