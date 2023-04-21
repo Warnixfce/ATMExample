@@ -29,5 +29,6 @@ Needed for testing purposes
     
 	-There are two unsuccessful longin attemps already made with this card (on purpose as well).
 
+An ERD (DER in spanish) is also available as 'ATM DER'.
 
-Feel free to test it!
+Feel free to check it out it!
