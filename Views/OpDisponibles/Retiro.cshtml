@@ -6,17 +6,10 @@
 <div class="text-center">
     <h1 class="display-5">Ingrese el monto a retirar:</h1>
     <form asp-action="Retiro" asp-controller="OpDisponibles">
-        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
-            @*@Html.TextBox("Monto","", new { @class = "text-center form-control-lg mb-2"/*, disabled="disabled", @readonly = "readonly"*/ })  *@
+        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">           
             <div class="btn-group">
-                @Html.TextBoxFor(model=> model.MontoRetiro, new { @class = "text-center form-control-lg mb-2"/*, disabled="disabled", @readonly = "readonly"*/})
-                @Html.HiddenFor(model=>model.Id_Tarjeta)
-                @*@Html.HiddenFor(model=>model.NumeroTarjeta)
-                @Html.HiddenFor(model=>model.PIN)
-                @Html.HiddenFor(model=>model.FechaVencimiento)
-                @Html.HiddenFor(model=>model.Balance)
-                @Html.HiddenFor(model=>model.Id_Estado)
-                @Html.HiddenFor(model=>model.Intentos)*@
+                @Html.TextBoxFor(model=> model.MontoRetiro, new { @class = "text-center form-control-lg mb-2", disabled="disabled", @readonly = "readonly"})
+                @Html.HiddenFor(model=>model.Id_Tarjeta)                
             </div>
             <div class="btn-group">
                 <a class="btn btn-outline-secondary py-3" asp-controller="OpDisponibles" asp-action="AddMontoT" asp-route-num="1" asp-route-monto="@Model.MontoRetiro" asp-route-idTar="@Model.Id_Tarjeta">1</a>
@@ -34,8 +27,7 @@
                 <a class="btn btn-outline-secondary py-3" asp-controller="OpDisponibles" asp-action="AddMontoT" asp-route-num="9" asp-route-monto="@Model.MontoRetiro" asp-route-idTar="@Model.Id_Tarjeta">9</a>
             </div>
             <div class="btn-group">
-                @*@Html.HiddenFor(model=>model.PIN)
-                @Html.HiddenFor(model=>model.Intentos)*@
+                
                 @Html.HiddenFor(model=>model.Id_Tarjeta)
                 @Html.HiddenFor(model=>model.MontoRetiro)
                 <a class="btn btn-outline-secondary py-3" asp-controller="OpDisponibles" asp-action="AddMontoT" asp-route-num="" asp-route-monto="" asp-route-idTaridTar="@Model.Id_Tarjeta">Limpiar</a>

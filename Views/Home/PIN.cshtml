@@ -39,13 +39,14 @@
             <div class="btn-group">
                 <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>
             </div>
-            @if(ViewBag.Mensaje != "")
-            {
-                <p><strong>@ViewBag.Mensaje</strong></p>
-                <p>Intentos: @Model.Intentos</p>
-            }
+     
         </div>
     </form>
+    @if (ViewBag.Mensaje != "")
+    {
+        <p><strong>@ViewBag.Mensaje</strong></p>
+        <p>Intentos: @Model.Intentos</p>
+    }
 
 </div>
 

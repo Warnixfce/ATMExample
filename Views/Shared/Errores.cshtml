@@ -13,14 +13,32 @@
             <code>@Model.RequestId</code>
         </p>
     }
-    <form asp-action="Index" asp-controller="Home">
-        <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
-            <div class="btn-group">                
-                @*<a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="Home" asp-action="Index">Salir</a>*@
-                <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
+    @if (ViewBag.Type == "")
+    {
+        <form asp-action="Index" asp-controller="Home">
+            <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+                <div class="btn-group">
+                    <input type="submit" class="btn btn-outline-secondary py-3" value="Atrás" />
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    }
+    @if (ViewBag.Type == "FondosInsuf")
+    {
+        <form asp-action="AddMontoT" asp-controller="OpDisponibles">
+            <div class="btn-group-vertical ml-4 mt-4" role="group" aria-label="Basic example">
+                <div class="btn-group">
+                    @Html.HiddenFor(model=>model.Id_Tarjeta)
+                    @Html.HiddenFor(model=>model.NumeroTarjeta)
+                    @Html.HiddenFor(model=>model.PIN)
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-outline-secondary py-3" asp-area="" asp-controller="OpDisponibles" asp-action="AddMontoT" asp-route-idTar=@Model.Id_Tarjeta>Atrás</a>                    
+                </div>
+            </div>
+        </form>
+    }
+
 
 
 

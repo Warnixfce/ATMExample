@@ -15,13 +15,7 @@
         public string Monto { get; set; }
 
         public string Balance { get; set; }
-
-        public enum OperacionRealiz
-        {
-            Consulta = 0,
-            Retiro = 1,
-            Ingreso = 2
-        }
+       
 
     }
 }

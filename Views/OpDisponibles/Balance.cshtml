@@ -16,30 +16,11 @@
                 </tr>
             </thead>
             <tbody>
-               
-                @*@foreach (var item in Model)
-                {
-                    <tr>
-                        <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
-                        <td>  @Html.DisplayFor(modelItem => item.NumeroTarjeta)</td>
-                        <td>  @Html.DisplayFor(modelItem => item.FechaHora)</td>
-                        <td>  @Html.DisplayFor(modelItem => item.Monto)</td>
-                    </tr>
-                }*@
-                
                 <tr>
                     <td>  @Html.DisplayFor(model => model.NumeroTarjeta)</td>
                     <td>  @Html.DisplayFor(model => model.FechaVencimiento)</td>
                     <td>  @Html.DisplayFor(model => model.Balance)</td>
-                </tr>
-               
-                @*<tr>
-                    <td> @Html</td>
-                    <td>  @Html.DisplayFor(Model => Model.FechaVencimiento)</td>
-                    <td>  @Html.DisplayFor(modelItem => item.TipoOperacion)</td>
-                    <td>  @Html.DisplayFor(Model => Model.Balance)</td>
-                    
-                </tr>*@          
+                </tr>                     
             </tbody>
         </table>
     <form asp-action="Operaciones" asp-controller="Home">

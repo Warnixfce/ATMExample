@@ -19,9 +19,6 @@ namespace ATMExercise.Controllers
 
         public IActionResult Balance(TarjetaViewModel tarjetaView)
         {
-            //var tarjetas = _context.Tarjeta.ToList();
-            //var tarjetaMatch = new TarjetaViewModel();
-            
             if (_context.Tarjeta.Any(m => m.IdTarjeta.ToString() == tarjetaView.Id_Tarjeta))
             {
                 Tarjeta tarjetaMatch = _context.Tarjeta.FirstOrDefault(m => m.IdTarjeta.ToString() == tarjetaView.Id_Tarjeta);
@@ -42,25 +39,9 @@ namespace ATMExercise.Controllers
                 tarjetaView.Balance = tarjetaMatch.Balance.ToString();
                 tarjetaView.Id_Estado = tarjetaMatch.IdEstado.ToString();
                 #endregion
-
             }
 
             return View(tarjetaView);
-
-            //foreach (var item in tarjetas)
-            //{
-            //    if (item.NumeroTarjeta.ToString() == tarjetaView.NumeroTarjeta && item.Pin.ToString() == tarjetaView.PIN)
-            //    {
-            //        tarjetaMatch.Id_Tarjeta = item.IdTarjeta.ToString();
-            //        tarjetaMatch.NumeroTarjeta = item.NumeroTarjeta.ToString();
-            //        tarjetaMatch.PIN = item.Pin.ToString();
-            //        tarjetaMatch.FechaVencimiento = item.FechaVencimiento.ToString();
-            //        tarjetaMatch.Balance = item.Balance.ToString();
-            //        tarjetaMatch.Id_Estado = item.IdEstado.ToString();
-            //    }
-            //}
-
-            //return View(tarjetaMatch);
         }
 
         public IActionResult Retiro(TarjetaViewModel tarjetaView)
@@ -73,10 +54,17 @@ namespace ATMExercise.Controllers
             }
             else
             {
+                #region ValidacionFondos
                 if (tarjetaMatch.Balance < decimal.Parse(tarjetaView.MontoRetiro))
                 {
-                    return View("Errores", new ErrorViewModel { RequestId = "Fondos insuficientes. Ingrese un monto a retirar menor al disponible." });
+                    ViewBag.Type = "FondosInsuf";
+                    string tarjId = tarjetaMatch.IdTarjeta.ToString();
+                    string tarjNum = tarjetaMatch.NumeroTarjeta.ToString();
+                    string tarjPin = tarjetaMatch.Pin.ToString();
+
+                    return View("Errores", new ErrorViewModel { RequestId = "Fondos insuficientes. Ingrese un monto a retirar menor al disponible.", Id_Tarjeta = tarjId, NumeroTarjeta = tarjNum, PIN = tarjPin });
                 }
+                #endregion
                 else
                 {
                     tarjetaMatch.Balance -= decimal.Parse(tarjetaView.MontoRetiro);
@@ -115,10 +103,8 @@ namespace ATMExercise.Controllers
             var tarjetaExtrac = new TarjetaViewModel();
             tarjetaExtrac.Id_Tarjeta = idTar;
             tarjetaExtrac.MontoRetiro = monto;
-
             tarjetaExtrac.MontoRetiro += num;
-            //ModelState.Clear();
-
+            
             return View("Retiro", tarjetaExtrac);
 
         }
