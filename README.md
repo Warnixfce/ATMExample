@@ -15,6 +15,8 @@ Application environment
 	-SQL Server Management Studio 2019 (19.0.2)
 
 	-All resources system requirements (e.g. Visual Studio system requirementes: https://learn.microsoft.com/en-us/visualstudio/releases/2022/system-requirements)
+	
+	-For the ERD: StarUML
 
 
 Needed for testing purposes
